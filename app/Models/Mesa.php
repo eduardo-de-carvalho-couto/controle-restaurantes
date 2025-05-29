@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mesa extends Model
 {
-    protected $table = 'mesa';
+    protected $table = 'MESA';
     protected $primaryKey = 'id_cliente';
     public $timestamps = false;
 

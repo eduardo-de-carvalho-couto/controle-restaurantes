@@ -3,14 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\MesaResource\Pages;
-use App\Filament\Resources\MesaResource\RelationManagers;
 use App\Models\Mesa;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextColumn;
 
 class MesaResource extends Resource
 {
@@ -40,7 +39,19 @@ class MesaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id_cliente')
+                    ->label('ID')
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make('nome_cliente')
+                    ->label('Nome')
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make('numero_mesa')
+                    ->label('Mesa')
+                    ->sortable(),
             ])
             ->filters([
                 //

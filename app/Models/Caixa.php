@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Caixa extends Model
 {
-    protected $table = 'caixa';
+    protected $table = 'CAIXA';
     protected $primaryKey = 'id_transacao';
     public $timestamps = false;
 

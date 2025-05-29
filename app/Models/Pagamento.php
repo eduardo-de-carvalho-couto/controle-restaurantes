@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pagamento extends Model
 {
-    protected $table = 'pagamento';
+    protected $table = 'PAGAMENTO';
     protected $primaryKey = 'id_pagamento';
     public $timestamps = false;
 

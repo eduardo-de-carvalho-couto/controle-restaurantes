@@ -15,6 +15,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextColumn;
 
 class ComandaResource extends Resource
 {
@@ -31,10 +32,10 @@ class ComandaResource extends Resource
                 ->relationship('mesa', 'nome_cliente')
                 ->required(),
 
-                TextInput::make('valor_comanda')
-                    ->label('Valor da Comanda')
-                    ->numeric()
-                    ->required(),
+                // TextInput::make('valor_comanda')
+                //     ->label('Valor da Comanda')
+                //     ->numeric()
+                //     ->required(),
 
                 DateTimePicker::make('data_comanda')
                     ->label('Data da Comanda')
@@ -47,10 +48,26 @@ class ComandaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id_comanda')->label('ID'),
-                Tables\Columns\TextColumn::make('mesa.nome_cliente')->label('Mesa'),
-                Tables\Columns\TextColumn::make('valor_comanda')->label('Valor')->money('BRL'),
-                Tables\Columns\TextColumn::make('data_comanda')->label('Data')->dateTime(),
+                TextColumn::make('id_comanda')
+                    ->label('ID'),
+
+                TextColumn::make('mesa.nome_cliente')
+                    ->label('Cliente'),
+
+                TextColumn::make('valor_comanda')
+                    ->label('Valor da Comanda')
+                    ->getStateUsing(function ($record) {
+                        return $record->pedidos()
+                            ->join('PRODUTO', 'PEDIDO.cod_prod', '=', 'PRODUTO.cod_prod')
+                            ->selectRaw('SUM(PEDIDO.quantidade * PRODUTO.valor_prod) as total')
+                            ->value('total') ?? 0;
+                    })
+                    ->money('BRL', true),
+
+                TextColumn::make('data_comanda')
+                    ->label('Data')
+                    ->dateTime('d/m/Y H:i'),
+
             ])
             ->filters([
                 //

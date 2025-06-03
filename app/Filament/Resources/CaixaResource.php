@@ -40,11 +40,10 @@ class CaixaResource extends Resource
                     ->numeric()
                     ->required(),
 
-                Select::make('id_pagamento')
-                    ->label('Pagamento')
-                    ->relationship('pagamento', 'id_pagamento')
-                    ->searchable()
-                    ->required(),
+                // Select::make('id_pagamento')
+                //     ->label('Pagamento')
+                //     ->relationship('pagamento', 'id_pagamento')
+                //     ->searchable(),
 
                 DateTimePicker::make('data_transacao')
                     ->label('Data da Transação')

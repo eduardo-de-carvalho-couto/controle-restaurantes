@@ -6,6 +6,9 @@ use App\Filament\Resources\PedidoResource\Pages;
 use App\Filament\Resources\PedidoResource\RelationManagers;
 use App\Models\Pedido;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,15 +31,26 @@ class PedidoResource extends Resource
                     ->relationship('comanda', 'id_comanda')
                     ->required(),
 
-                Forms\Components\Select::make('cod_prod')
-                    ->label('Produto')
-                    ->relationship('produto', 'nome_prod')
-                    ->required(),
+                Repeater::make('itens')
+                    ->label('Produtos')
+                    ->schema([
+                        Select::make('cod_prod')
+                            ->label('Produto')
+                            ->relationship('produto', 'nome_prod')
+                            ->columnSpan(1)
+                            ->required(),
 
-                Forms\Components\TextInput::make('quantidade')
-                    ->numeric()
-                    ->minValue(1)
-                    ->required(),
+                        TextInput::make('quantidade')
+                            ->label('Quantidade')
+                            ->numeric()
+                            ->minValue(1)
+                            ->columnSpan(1)
+                            ->required(),
+                    ])
+                    ->minItems(1)
+                    ->label('Pedidos')
+                    ->columnSpan(2)
+                    ->columns(2),
             ]);
     }
 

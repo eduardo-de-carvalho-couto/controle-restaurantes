@@ -44,6 +44,13 @@ class PagamentoResource extends Resource
             ]);
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->withoutGlobalScopes([
+            SoftDeletingScope::class,
+        ]);
+    }
+
     public static function table(Table $table): Table
     {
         return $table

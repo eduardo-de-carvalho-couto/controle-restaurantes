@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comanda extends Model
 {
-    protected $table = 'COMANDA';
+    use SoftDeletes;
+    
+    protected $table = 'comanda';
     protected $primaryKey = 'id_comanda';
-    public $timestamps = false;
+    // public $timestamps = false;
 
     protected $fillable = ['id_cliente', 'valor_comanda', 'data_comanda'];
 

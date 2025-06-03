@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pagamento extends Model
 {
-    protected $table = 'PAGAMENTO';
+    use SoftDeletes;
+    
+    protected $table = 'pagamento';
     protected $primaryKey = 'id_pagamento';
     public $timestamps = false;
 

@@ -64,8 +64,8 @@ class ComandaResource extends Resource
                     ->label('Valor da Comanda')
                     ->getStateUsing(function ($record) {
                         return $record->pedidos()
-                            ->join('PRODUTO', 'PEDIDO.cod_prod', '=', 'PRODUTO.cod_prod')
-                            ->selectRaw('SUM(PEDIDO.quantidade * PRODUTO.valor_prod) as total')
+                            ->join('produto', 'pedido.cod_prod', '=', 'produto.cod_prod')
+                            ->selectRaw('SUM(pedido.quantidade * produto.valor_prod) as total')
                             ->value('total') ?? 0;
                     })
                     ->money('BRL', true),

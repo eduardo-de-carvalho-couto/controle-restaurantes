@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Caixa extends Model
 {
-    protected $table = 'CAIXA';
+    use SoftDeletes;
+
+    protected $table = 'caixa';
     protected $primaryKey = 'id_transacao';
-    public $timestamps = false;
+    // public $timestamps = false;
 
     protected $fillable = ['tipo_transacao', 'valor_transacao', 'id_pagamento', 'data_transacao'];
 

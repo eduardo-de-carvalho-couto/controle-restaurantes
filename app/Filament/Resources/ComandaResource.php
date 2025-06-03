@@ -28,9 +28,10 @@ class ComandaResource extends Resource
         return $form
             ->schema([
                 Select::make('id_cliente')
-                ->label('Mesa(Nome do Cliente)')
-                ->relationship('mesa', 'nome_cliente')
-                ->required(),
+                    ->label('Mesa(Nome do Cliente)')
+                    ->relationship('mesa', 'nome_cliente')
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->nome_cliente ?? "Mesa {$record->id_cliente}")
+                    ->required(),
 
                 // TextInput::make('valor_comanda')
                 //     ->label('Valor da Comanda')

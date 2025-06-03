@@ -67,7 +67,24 @@ class PedidoResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->form([
+                        Forms\Components\Select::make('id_comanda')
+                            ->label('Comanda')
+                            ->relationship('comanda', 'id_comanda')
+                            ->required(),
+
+                        Forms\Components\Select::make('cod_prod')
+                            ->label('Produto')
+                            ->relationship('produto', 'nome_prod')
+                            ->required(),
+
+                        Forms\Components\TextInput::make('quantidade')
+                            ->label('Quantidade')
+                            ->numeric()
+                            ->minValue(1)
+                            ->required(),
+                    ]),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

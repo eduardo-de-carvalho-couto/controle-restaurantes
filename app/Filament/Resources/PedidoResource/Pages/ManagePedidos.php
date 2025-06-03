@@ -23,7 +23,7 @@ class ManagePedidos extends ManageRecords
                             'quantidade' => $pedido['quantidade'],
                         ]);
                     }
-                })
+                }),
         ];
     }
 }

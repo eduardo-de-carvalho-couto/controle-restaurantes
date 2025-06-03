@@ -23,7 +23,6 @@ class MesaResource extends Resource
             ->schema([
                 TextInput::make('nome_cliente')
                     ->label('Nome do Cliente')
-                    ->required()
                     ->maxLength(80),
 
                 TextInput::make('numero_mesa')

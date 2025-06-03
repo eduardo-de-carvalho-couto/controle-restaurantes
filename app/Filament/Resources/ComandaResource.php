@@ -44,6 +44,12 @@ class ComandaResource extends Resource
             ]);
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->whereDoesntHave('pagamentos'); // <- aqui aplica o filtro
+    }
+
     public static function table(Table $table): Table
     {
         return $table
